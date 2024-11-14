@@ -11,16 +11,17 @@ white = pygame.Color(255, 255, 255)
 red = pygame.Color(255, 0, 0)
 green = pygame.Color(0, 255, 0)
 blue = pygame.Color(0, 0, 255)
+sky = pygame.Color(160, 160, 255)
 
 # Initialize pygame
 pygame.init()
 
 # Set up the game window
-pygame.display.set_caption('MineRealm Pre-Alpha 1.0')
+pygame.display.set_caption('MineRealm Pre-Alpha 1.0.0')
 game_window = pygame.display.set_mode((window_x, window_y))
 
 # Fill the window with blue color
-game_window.fill(blue)
+game_window.fill(sky)
 pygame.display.flip()
 
 # Start the generation process

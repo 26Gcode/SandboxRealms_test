@@ -10,7 +10,7 @@ GREEN = pygame.Color(0, 255, 0)
 BLUE = pygame.Color(0, 0, 255)
 
 # Define block types for the world (e.g., dirt, grass, stone)
-BLOCK_TYPES = ["dirt", "grass", "stone"]
+BLOCK_TYPES = ["dirt", "grass"]
 
 # Texture loading function with error handling
 def load_texture(file_path, scale_factor=0.2):
@@ -39,19 +39,30 @@ def gameover():
 def generate_world(width, height, block_size):
     """Generates a random world by creating a grid of blocks."""
     world = []
-    for y in range(height):
-        row = []
-        for x in range(width):
+    for x in range(width):
+        BLOCK_TYPES2 = ["grass", "air", "air", "air", "air"]
+        col = []
+        for y in range(height):
             # Randomly select a block type
-            block_type = random.choice(BLOCK_TYPES)
-            row.append(block_type)
-        world.append(row)
+            block_type = random.choice(BLOCK_TYPES2)
+            if block_type == "grass":
+                 BLOCK_TYPES2 = ["dirt"]
+            col.append(block_type)
+        world.append(col)
     return world
 
 def draw_world(game_window, world, block_size, textures):
     """Draws the world (grid of blocks) on the screen."""
-    for y, row in enumerate(world):
+    air_col = [["air"]]
+    for y, row in enumerate(air_col):
         for x, block_type in enumerate(row):
+            block_texture = textures.get("air")
+            if block_texture:
+                # Draw the block at the correct position
+                game_window.blit(block_texture, (x * block_size, y * block_size))
+    
+    for x, col in enumerate(world):
+        for y, block_type in enumerate(col):
             block_texture = textures.get(block_type)
             if block_texture:
                 # Draw the block at the correct position
@@ -63,9 +74,10 @@ def generation(game_window):
     dirt_texture = load_texture('textures/dirt_block.png')
     grass_texture = load_texture('textures/grass_block.png')
     stone_texture = load_texture('textures/stone_block.png')
+    air_texture = load_texture('textures/air_block.png')
 
     # Check if textures loaded successfully
-    if not dirt_texture or not grass_texture or not stone_texture:
+    if not dirt_texture or not grass_texture or not stone_texture or not air_texture:
         print("One or more textures failed to load.")
         return
 
@@ -73,7 +85,8 @@ def generation(game_window):
     block_textures = {
         "dirt": dirt_texture,
         "grass": grass_texture,
-        "stone": stone_texture
+        "stone": stone_texture,
+        "air": air_texture
     }
 
     # Define world size and block size
@@ -93,7 +106,6 @@ def generation(game_window):
                 running = False
 
         # Fill screen with blue background
-        game_window.fill(BLUE)
 
         # Draw the generated world
         draw_world(game_window, world, block_size, block_textures)
