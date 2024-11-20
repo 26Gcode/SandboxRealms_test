@@ -17,7 +17,7 @@ sky = pygame.Color(160, 160, 255)
 pygame.init()
 
 # Set up the game window
-pygame.display.set_caption('MineRealm Pre-Alpha 1.0.0')
+pygame.display.set_caption('SandboxRealms Pre-Alpha 1.0.0')
 game_window = pygame.display.set_mode((window_x, window_y))
 
 # Fill the window with blue color

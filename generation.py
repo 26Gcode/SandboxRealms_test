@@ -37,30 +37,25 @@ def gameover():
             quit()
 
 def generate_world(width, height, block_size):
-    """Generates a random world by creating a grid of blocks."""
     world = []
     for x in range(width):
-        BLOCK_TYPES2 = ["grass", "air", "air", "air", "air"]
+        BLOCK_TYPES2 = ["grass", "grass", "air"]
         col = []
-        for y in range(height):
+        for i in range(0,4):
+            col.append("air")
+        for y in range(height // (30 // 10)):
             # Randomly select a block type
             block_type = random.choice(BLOCK_TYPES2)
             if block_type == "grass":
                  BLOCK_TYPES2 = ["dirt"]
             col.append(block_type)
+        for i in range(0,20):
+            col.append("stone")
         world.append(col)
     return world
 
 def draw_world(game_window, world, block_size, textures):
     """Draws the world (grid of blocks) on the screen."""
-    air_col = [["air"]]
-    for y, row in enumerate(air_col):
-        for x, block_type in enumerate(row):
-            block_texture = textures.get("air")
-            if block_texture:
-                # Draw the block at the correct position
-                game_window.blit(block_texture, (x * block_size, y * block_size))
-    
     for x, col in enumerate(world):
         for y, block_type in enumerate(col):
             block_texture = textures.get(block_type)
@@ -91,12 +86,12 @@ def generation(game_window):
 
     # Define world size and block size
     world_width = 100  # Number of blocks horizontally
-    world_height = 100  # Number of blocks vertically
+    world_height = 40  # Number of blocks vertically
     block_size = 32  # Size of each block in pixels (e.g., 32x32)
 
     # Generate the world (a grid of blocks)
     world = generate_world(world_width, world_height, block_size)
-
+    
     # Main game loop
     running = True
     while running:
