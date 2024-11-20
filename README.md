@@ -1,4 +1,4 @@
-# MineRealm
+# SandboxRealms
 Currently, completly random generation
 
 # Coming in the next update: Pre-alpha 1.0.1
