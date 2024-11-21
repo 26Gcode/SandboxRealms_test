@@ -43,7 +43,7 @@ def generate_world(width, height, block_size):
         col = []
         for i in range(0,4):
             col.append("air")
-        for y in range(height // (30 // 10)):
+        for y in range(height // ((300 // 10) // 10)):
             # Randomly select a block type
             block_type = random.choice(BLOCK_TYPES2)
             if block_type == "grass":
