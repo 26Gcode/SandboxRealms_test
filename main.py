@@ -1,9 +1,10 @@
 import pygame
 import generation
+import message
 
 # Define window size
-window_x = 1920
-window_y = 1030
+window_x = 1820
+window_y = 930
 
 # Define color constants
 black = pygame.Color(0, 0, 0)
@@ -23,6 +24,9 @@ game_window = pygame.display.set_mode((window_x, window_y))
 # Fill the window with blue color
 game_window.fill(sky)
 pygame.display.flip()
+
+# Show the block selection message at the start
+message.display_message(game_window)
 
 # Start the generation process
 generation.generation(game_window)
