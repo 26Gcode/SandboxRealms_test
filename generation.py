@@ -3,6 +3,9 @@ import random
 import os
 from block_interaction import handle_block_interaction  # Use functions from block_interaction
 
+texture_map = {}
+
+
 # Texture loading function with error handling
 def load_texture(file_path, scale_factor=0.2):
     """Loads and scales a texture."""
@@ -47,6 +50,14 @@ def draw_world(game_window, world, block_size, textures):
             block_texture = textures.get(block_type)
             if block_texture:
                 game_window.blit(block_texture, (x * block_size, y * block_size))
+                if block_texture == "dirt":
+                    texture_map[0].append(x*block_size, y*block_size)
+                elif block_texture == "grass":
+                    texture_map[1].append(x*block_size, y*block_size)
+                elif block_texture == "stone":
+                    texture_map[2].append(x*block_size, y*block_size)
+                elif block_texture == "air":
+                    texture_map[3].append(x*block_size, y*block_size)
 
 
 def generation(game_window):

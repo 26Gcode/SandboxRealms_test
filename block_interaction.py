@@ -1,7 +1,7 @@
 import pygame
 
 # Define constants for block types
-BLOCK_TYPES = ["grass", "dirt", "stone", "air"]
+BLOCK_TYPES = ["grass", "dirt", "stone"]
 
 # Initialize selected block index (starts with the first block)
 selected_block_index = 0
@@ -23,9 +23,9 @@ def handle_block_interaction(game_window, world, block_size):
     if any(mouse_pressed):  # Check if any mouse button is pressed
         x, y = block_coords
         if 0 <= y < len(world[0]) and 0 <= x < len(world):  # Ensure within bounds
-            if mouse_pressed[0]:  # Left click - place a block
+            if mouse_pressed[2]:
                 world[x][y] = BLOCK_TYPES[selected_block_index]
-            elif mouse_pressed[2]:  # Right click - remove block
+            elif mouse_pressed[0]: 
                 world[x][y] = "air"
 
     # Handle block selection using number keys
