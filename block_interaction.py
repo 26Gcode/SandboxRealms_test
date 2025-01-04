@@ -1,7 +1,5 @@
 import pygame
-
-# Define constants for block types
-BLOCK_TYPES = ["grass", "dirt", "stone"]
+from constants import BLOCK_TYPES
 
 # Initialize selected block index (starts with the first block)
 selected_block_index = 0

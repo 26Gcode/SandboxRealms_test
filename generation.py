@@ -2,26 +2,11 @@ import pygame
 import random
 import os
 from block_interaction import handle_block_interaction  # Use functions from block_interaction
-
+from constants import dirt_texture, grass_texture, stone_texture, air_texture
 texture_map = {}
 
 
-# Texture loading function with error handling
-def load_texture(file_path, scale_factor=0.2):
-    """Loads and scales a texture."""
-    try:
-        if not os.path.exists(file_path):
-            raise FileNotFoundError(f"Texture file not found: {file_path}")
-        
-        texture = pygame.image.load(file_path)
-        texture = pygame.transform.scale(texture, (
-            int(texture.get_width() * scale_factor),
-            int(texture.get_height() * scale_factor)
-        ))
-        return texture
-    except Exception as e:
-        print(f"Error loading texture: {e}")
-        return None
+
 
 
 def generate_world(width, height):
@@ -62,11 +47,7 @@ def draw_world(game_window, world, block_size, textures):
 
 def generation(game_window):
     """Handles the generation of game content."""
-    # Load textures for each block type
-    dirt_texture = load_texture('textures/dirt_block.png')
-    grass_texture = load_texture('textures/grass_block.png')
-    stone_texture = load_texture('textures/stone_block.png')
-    air_texture = load_texture('textures/air_block.png')
+    
 
     # Store textures in a dictionary for easy access
     block_textures = {
